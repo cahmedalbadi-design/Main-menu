@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<style>
+body{
+  font-family:'Segoe UI',Tahoma,Arial;
+  margin:0;
+  background:linear-gradient(135deg,#0f172a,#020617);
+  color:white;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.header{
+  background:rgba(30,41,59,0.6);
+  backdrop-filter:blur(12px);
+  padding:14px;
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+  letter-spacing:1px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  box-shadow:0 6px 20px rgba(0,0,0,0.6);
+}
+
+/* شبكة 3x3 ثابتة */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);  /* 3 أعمدة متساوية */
+  gap:16px;
+  padding:20px;
+  max-width: 1000px;
+  margin: 20px auto;
+}
+
+.card{
+  background:rgba(30,41,59,0.55);
+  backdrop-filter:blur(10px);
+  border-radius:16px;
+  padding:14px;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  min-height:120px;
+  border:1px solid rgba(255,255,255,0.05);
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.15),transparent);
+  transition:0.5s;
+}
+
+.card:hover::before{
+  left:100%;
+}
+
+.card:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 18px 40px rgba(0,0,0,0.7);
+}
+
+.card:active{
+  transform:scale(0.96);
+}
+
+.icon{
+  font-size:32px;
+  margin-bottom:8px;
+  transition:0.3s;
+}
+
+.card:hover .icon{
+  transform:scale(1.2) rotate(3deg);
+}
+
+.title{
+  font-size:20px;
+  font-weight:600;
+  margin-bottom:10px;
+}
+
+.desc{
+  font-size:11px;
+  color:#94a3b8;
+}
+</style>
+</head>
+<body>
+
+<div class="header">✨ لوحة التحكم الرئيسية ✨</div>
+
+<div class="grid">
+  <!-- الصف الأول -->
+  <div class="card" onclick="run('breeder-data','بيانات المربي')">
+    <div class="icon">👨‍🌾</div>
+    <div class="title">بيانات المربي</div>
+    <div class="desc">تخزين البيانات</div>
+  </div>
+
+  <div class="card" onclick="run('treatment-record','سجل العلاج')">
+    <div class="icon">🩺</div>
+    <div class="title">سجل العلاج</div>
+    <div class="desc">تحميل البيانات</div>
+  </div>
+
+  <!-- الصف الثاني -->
+  <div class="card" onclick="run('immunization-record','سجل التحصين')">
+    <div class="icon">💉</div>
+    <div class="title">سجل التحصين</div>
+    <div class="desc">إدارة الاستثناءات</div>
+  </div>
+
+<div class="card" onclick="run('Reports','التقارير')">
+    <div class="icon">🧾</div>
+    <div class="title">التقارير</div>
+    <div class="desc">مزامنة البيانات</div>
+  </div>
+
+  <div class="card" onclick="run('sample-model','نموذج العينات')">
+    <div class="icon">🧪</div>
+    <div class="title">نموذج العينات</div>
+    <div class="desc">تحميل النموذج</div>
+  </div>
+
+  <div class="card" onclick="run('immunization-requests','طلبات التحصين')">
+    <div class="icon">📋</div>
+    <div class="title">طلبات التحصين</div>
+    <div class="desc">التحكم بالطلبات</div>
+  </div>
+
+  <!-- الصف الثالث (الأزرار الجديدة) -->
+  <div class="card" onclick="run('users-management','إدارة المستخدمين')">
+    <div class="icon">👥</div>
+    <div class="title">إدارة المستخدمين</div>
+    <div class="desc">صلاحيات وأدوار</div>
+  </div>
+
+  <div class="card" onclick="run('statistics','الإحصائيات')">
+    <div class="icon">📊</div>
+    <div class="title">الإحصائيات</div>
+    <div class="desc">تقارير متقدمة</div>
+  </div>
+
+  <div class="card" onclick="run('settings','الإعدادات')">
+    <div class="icon">⚙️</div>
+    <div class="title">الإعدادات</div>
+    <div class="desc">تخصيص النظام</div>
+  </div>
+</div>
+
+<!-- المؤثرات الصوتية -->
+<audio id="hoverSound"><source src="https://h.top4top.io/m_3725yodmc1.mp3"></audio>
+<audio id="clickSound"><source src="https://f.top4top.io/m_3728siuy10.mp3"></audio>
+<audio id="finishSound"><source src="https://a.top4top.io/m_3725yam351.mp3"></audio>
+<audio id="errorSound"><source src="https://a.top4top.io/m_3725yam351.mp3"></audio>
+
+<script>
+// إضافة أصوات التحويم والنقر على البطاقات
+document.querySelectorAll(".card").forEach(el => {
+  el.addEventListener("mouseenter", () => {
+    let s = document.getElementById("hoverSound");
+    s.currentTime = 0;
+    s.play().catch(e => console.log("صوت hover معطل"));
+  });
+  el.addEventListener("click", () => {
+    let s = document.getElementById("clickSound");
+    s.currentTime = 0;
+    s.play().catch(e => console.log("صوت click معطل"));
+  });
+});
+
+// دالة run (يجب أن تكون معرفة مسبقاً في الجانب الخادم)
+function run(route, title) {
+  // مثال: إرسال الأمر إلى Google Apps Script
+  google.script.run.withSuccessHandler(() => {
+    let finish = document.getElementById("finishSound");
+    finish.currentTime = 0;
+    finish.play();
+  }).withFailureHandler(() => {
+    let err = document.getElementById("errorSound");
+    err.currentTime = 0;
+    err.play();
+  }).processMenuAction(route, title);
+}
+</script>
+</body>
+</html>
