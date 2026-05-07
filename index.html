@@ -111,6 +111,15 @@
       text-align: right;
     }
     input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(46,125,205,0.13); background: #fff; }
+    input.input-error { border-color: var(--error) !important; box-shadow: 0 0 0 3px rgba(192,57,43,0.13) !important; animation: shake 0.4s ease; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(4px); }
+    }
 
     .toggle-pass {
       position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
@@ -170,6 +179,105 @@
     .alert.success { background: var(--success-bg); color: var(--success); border: 1px solid #b2dfcd; }
     .alert.warn    { background: var(--warn-bg);    color: var(--warn);    border: 1px solid #f0d890; }
 
+    /* ===== TOAST NOTIFICATION ===== */
+    .toast-container {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      min-width: 280px;
+      max-width: 380px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+      pointer-events: all;
+      animation: toastIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      direction: rtl;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .toast::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      height: 3px;
+      background: rgba(255,255,255,0.4);
+      animation: toastProgress linear forwards;
+    }
+
+    .toast.error {
+      background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+      color: #fff;
+    }
+
+    .toast.success {
+      background: linear-gradient(135deg, #1a7a4a 0%, #27ae60 100%);
+      color: #fff;
+    }
+
+    .toast.warn {
+      background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
+      color: #fff;
+    }
+
+    .toast-icon {
+      width: 38px; height: 38px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .toast-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    .toast-body { flex: 1; }
+    .toast-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .toast-msg { font-size: 12px; font-weight: 500; opacity: 0.9; }
+
+    .toast-close {
+      background: rgba(255,255,255,0.2);
+      border: none; border-radius: 7px;
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: #fff; flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .toast-close:hover { background: rgba(255,255,255,0.35); }
+    .toast-close svg { width: 13px; height: 13px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; }
+
+    .toast.hiding {
+      animation: toastOut 0.3s ease forwards;
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(-20px) scale(0.92); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes toastOut {
+      from { opacity: 1; transform: translateY(0) scale(1); }
+      to   { opacity: 0; transform: translateY(-16px) scale(0.94); }
+    }
+    @keyframes toastProgress {
+      from { width: 100%; }
+      to   { width: 0%; }
+    }
+    /* ===== END TOAST ===== */
+
     .welcome-screen { display: none; padding: 10px 0 6px; }
     .welcome-top { text-align: center; margin-bottom: 24px; }
     .welcome-icon {
@@ -202,36 +310,22 @@
     .notice-box code { background: rgba(46,125,205,0.12); padding: 1px 5px; border-radius: 4px; font-family: monospace; font-size: 11px; word-break: break-all; }
     .notice-box a { color: var(--accent); }
 
-    .script-row { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 16px; }
-    .script-row .form-group { flex: 1; margin-bottom: 0; }
-    .save-btn {
-      padding: 11px 14px; background: var(--primary); color: #fff; border: none;
-      border-radius: var(--radius); font-family: 'Cairo', sans-serif; font-size: 13px;
-      font-weight: 600; cursor: pointer; white-space: nowrap; transition: opacity 0.2s; flex-shrink: 0;
-    }
-    .save-btn:hover { opacity: 0.88; }
-
     hr.div { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
 
     .footer { text-align: center; margin-top: 18px; font-size: 11px; color: var(--muted); }
 
-    /* Apps Script code block */
-    .code-block {
-      background: #1a2535; color: #a8d8a8; border-radius: var(--radius);
-      padding: 12px 14px; font-family: monospace; font-size: 11px; line-height: 1.8;
-      margin-top: 10px; overflow-x: auto; direction: ltr; text-align: left;
-    }
-    .code-block .kw { color: #79b8ff; }
-    .code-block .str { color: #f0a98a; }
-    .code-block .cm { color: #6a8a6a; }
-
     @media (max-width: 480px) {
       .card { padding: 28px 18px 24px; margin: 12px; }
+      .toast { min-width: 260px; }
     }
   </style>
-<base target="_blank">
+  <base target="_blank">
 </head>
 <body>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
 <div class="card">
 
   <!-- LOGIN VIEW -->
@@ -356,11 +450,11 @@
   </div>
 
 </div>
+
 <script>
   const SHEET_ID  = '1TzE44MOz8OqPdR-FzZLn5fhq9NDwhGN_X20xsusv1qE';
   const CSV_URL   = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwke264iU5mQ6he6CQ7zn7guHguL9DUnFMKARkgZsCGPT3QTG47psoaTYu5rEw0ijO7Mg/exec';
-  const SK        = 'apps_script_url';
 
   const EO = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
   const EC = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>`;
@@ -405,12 +499,81 @@
     el.style.display = 'flex';
   }
 
+  // ===== TOAST SYSTEM =====
+  function showToast(type, title, message, duration = 4000) {
+    const container = document.getElementById('toastContainer');
+
+    const icons = {
+      error:   `<circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>`,
+      success: `<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>`,
+      warn:    `<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>`
+    };
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+      <div class="toast-icon">
+        <svg viewBox="0 0 24 24">${icons[type]||icons.error}</svg>
+      </div>
+      <div class="toast-body">
+        <div class="toast-title">${title}</div>
+        <div class="toast-msg">${message}</div>
+      </div>
+      <button class="toast-close" onclick="dismissToast(this.parentElement)">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    `;
+
+    // progress bar duration via CSS
+    toast.style.setProperty('--dur', duration + 'ms');
+    const pb = toast.querySelector('::after');
+    toast.style.cssText += `--progress-dur: ${duration}ms`;
+
+    // Inject dynamic keyframe for progress
+    const styleId = 'toast-progress-style';
+    if (!document.getElementById(styleId)) {
+      const s = document.createElement('style');
+      s.id = styleId;
+      document.head.appendChild(s);
+    }
+    document.getElementById(styleId).textContent = `.toast::after { animation-duration: ${duration}ms; }`;
+
+    container.appendChild(toast);
+
+    const timer = setTimeout(() => dismissToast(toast), duration);
+    toast._timer = timer;
+
+    return toast;
+  }
+
+  function dismissToast(toast) {
+    if (!toast || toast.classList.contains('hiding')) return;
+    clearTimeout(toast._timer);
+    toast.classList.add('hiding');
+    toast.addEventListener('animationend', () => toast.remove(), { once: true });
+  }
+
+  function shakeInput(id) {
+    const el = document.getElementById(id);
+    el.classList.remove('input-error');
+    void el.offsetWidth; // reflow to restart animation
+    el.classList.add('input-error');
+    setTimeout(() => el.classList.remove('input-error'), 500);
+  }
+  // ===== END TOAST =====
+
   // LOGIN
   async function doLogin() {
     const u = document.getElementById('username').value.trim();
     const p = document.getElementById('password').value.trim();
     document.getElementById('loginErr').style.display='none';
-    if (!u||!p) { alert2('loginErr','','loginErrTx','error','الرجاء إدخال اسم المستخدم وكلمة المرور.'); return; }
+
+    if (!u || !p) {
+      if (!u) shakeInput('username');
+      if (!p) shakeInput('password');
+      showToast('warn', 'حقول مطلوبة', 'الرجاء إدخال اسم المستخدم وكلمة المرور.');
+      return;
+    }
 
     document.getElementById('loginBtn').disabled=true;
     document.getElementById('lsp').style.display='block';
@@ -424,19 +587,26 @@
       UK = fk(users[0]||{}, ['user','اسم','username']);
       PK = fk(users[0]||{}, ['pass','كلمة','password']);
       NK = fk(users[0]||{}, ['name','الاسم','full']);
-      if (!UK||!PK) { alert2('loginErr','','loginErrTx','error','تعذّر العثور على أعمدة البيانات.'); }
-      else {
+      if (!UK||!PK) {
+        showToast('error', 'خطأ في البيانات', 'تعذّر العثور على أعمدة البيانات.');
+      } else {
         const m = users.find(u2=>(u2[UK]||'').toLowerCase()===u.toLowerCase()&&(u2[PK]||'')===p);
         if (m) {
           CU = {...m, _u: u};
           document.getElementById('welcomeName').textContent = `مرحباً، ${NK?(m[NK]||u):u}!`;
           show(V.welcome);
         } else {
-          alert2('loginErr','','loginErrTx','error','اسم المستخدم أو كلمة المرور غير صحيحة.');
+          // Shake both fields
+          shakeInput('username');
+          shakeInput('password');
+          // Clear password for security
+          document.getElementById('password').value = '';
+          // Show toast
+          showToast('error', 'فشل تسجيل الدخول', 'اسم المستخدم أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.', 5000);
         }
       }
     } catch {
-      alert2('loginErr','','loginErrTx','error','خطأ في الاتصال. تأكد من مشاركة الجدول بشكل عام.');
+      showToast('error', 'خطأ في الاتصال', 'تعذّر الاتصال بالخادم. تأكد من مشاركة الجدول بشكل عام.');
     } finally {
       document.getElementById('loginBtn').disabled=false;
       document.getElementById('lsp').style.display='none';
