@@ -306,36 +306,9 @@
       </div>
     </div>
 
-    <div class="notice-box" id="scriptNotice">
-      <strong>⚙️ إعداد مطلوب — Google Apps Script</strong>
-      أنشئ Script جديد في <a href="https://script.google.com/home" target="_blank">script.google.com</a> وانسخ الكود التالي فيه، ثم انشره كـ Web App وأدخل الرابط أدناه:
-      <div class="code-block"><span class="kw">function</span> doGet(e) {
-  <span class="kw">var</span> p = e.parameter;
-  <span class="kw">var</span> ss = SpreadsheetApp.openById(p.sheetId);
-  <span class="kw">var</span> sh = ss.getSheets()[0];
-  <span class="kw">var</span> data = sh.getDataRange().getValues();
-  <span class="kw">var</span> headers = data[0].map(<span class="kw">function</span>(h){ <span class="kw">return</span> h.toString().toLowerCase(); });
-  <span class="kw">var</span> uCol = headers.indexOf(p.usernameKey);
-  <span class="kw">var</span> pCol = headers.indexOf(p.passwordKey);
-  <span class="kw">for</span> (<span class="kw">var</span> i=1; i&lt;data.length; i++) {
-    <span class="kw">if</span> (data[i][uCol].toString().toLowerCase() === p.username.toLowerCase()) {
-      sh.getRange(i+1, pCol+1).setValue(p.newPassword);
-      <span class="kw">return</span> ContentService.createTextOutput(<span class="str">"success"</span>);
-    }
-  }
-  <span class="kw">return</span> ContentService.createTextOutput(<span class="str">"not_found"</span>);
-}</div>
-    </div>
-
-    <div class="script-row">
-      <div class="form-group">
-        <label for="scriptUrl">رابط Web App</label>
-        <div class="input-wrap">
-          <span class="input-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
-          <input type="text" id="scriptUrl" placeholder="https://script.google.com/macros/s/..." style="padding-left:14px;text-align:left;direction:ltr;font-size:12px;"/>
-        </div>
-      </div>
-      <button class="save-btn" id="saveScript">حفظ</button>
+    <div style="background:#e6f5ed;border:1px solid #b2dfcd;border-radius:12px;padding:12px 14px;font-size:13px;color:#1a7a4a;margin-bottom:16px;display:flex;align-items:center;gap:9px;">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <span><strong>متصل بـ Google Sheets</strong> — سيتم التحديث مباشرةً في جدول البيانات.</span>
     </div>
 
     <hr class="div"/>
@@ -383,8 +356,9 @@
 
 </div>
 <script>
-  const SHEET_ID  = '1mqWU5jNw8PZhJP-j3QLdDBjO8OxyT9xjiU5dIJ0BHgA';
+  const SHEET_ID  = '1TzE44MOz8OqPdR-FzZLn5fhq9NDwhGN_X20xsusv1qE';
   const CSV_URL   = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwke264iU5mQ6he6CQ7zn7guHguL9DUnFMKARkgZsCGPT3QTG47psoaTYu5rEw0ijO7Mg/exec';
   const SK        = 'apps_script_url';
 
   const EO = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
@@ -483,23 +457,10 @@
     ['oldPass','newPass','confPass'].forEach(id=>document.getElementById(id).value='');
     document.getElementById('cpAlert').style.display='none';
     updateStrength('');
-    const saved = localStorage.getItem(SK);
-    if (saved) { document.getElementById('scriptUrl').value=saved; document.getElementById('scriptNotice').style.display='none'; }
-    else { document.getElementById('scriptNotice').style.display='block'; }
     show(V.cp);
   });
 
   document.getElementById('backBtn').addEventListener('click', ()=>show(V.welcome));
-
-  document.getElementById('saveScript').addEventListener('click', ()=>{
-    const url = document.getElementById('scriptUrl').value.trim();
-    if (!url.startsWith('https://script.google.com')) {
-      alert2('cpAlert','cpAlertIco','cpAlertTx','warn','أدخل رابط Apps Script صحيحاً.'); return;
-    }
-    localStorage.setItem(SK, url);
-    document.getElementById('scriptNotice').style.display='none';
-    alert2('cpAlert','cpAlertIco','cpAlertTx','success','✓ تم حفظ رابط Apps Script.');
-  });
 
   // Strength meter
   document.getElementById('newPass').addEventListener('input', e=>updateStrength(e.target.value));
@@ -524,7 +485,7 @@
     const oldP = document.getElementById('oldPass').value.trim();
     const newP = document.getElementById('newPass').value.trim();
     const conf = document.getElementById('confPass').value.trim();
-    const surl = localStorage.getItem(SK)||document.getElementById('scriptUrl').value.trim();
+    const surl = SCRIPT_URL;
 
     document.getElementById('cpAlert').style.display='none';
 
@@ -533,7 +494,7 @@
     if(newP.length<6)        { alert2('cpAlert','cpAlertIco','cpAlertTx','error','كلمة المرور الجديدة يجب أن تكون 6 أحرف على الأقل.'); return; }
     if(newP!==conf)          { alert2('cpAlert','cpAlertIco','cpAlertTx','error','كلمة المرور وتأكيدها غير متطابقتين.'); return; }
     if(newP===oldP)          { alert2('cpAlert','cpAlertIco','cpAlertTx','warn','كلمة المرور الجديدة مطابقة للحالية.'); return; }
-    if(!surl||!surl.startsWith('https://script.google.com')){ alert2('cpAlert','cpAlertIco','cpAlertTx','warn','يرجاء إدخال رابط Google Apps Script وحفظه أولاً.'); return; }
+
 
     document.getElementById('cpBtn').disabled=true;
     document.getElementById('cpsp').style.display='block';
@@ -566,4 +527,3 @@
 </script>
 </body>
 </html>
-
