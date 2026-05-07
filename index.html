@@ -11,7 +11,6 @@
     :root {
       --primary: #1a3a5c;
       --accent: #2e7dcd;
-      --accent-light: #e8f2fc;
       --bg: #f0f4f9;
       --card-bg: #ffffff;
       --text: #1a2535;
@@ -21,8 +20,9 @@
       --success-bg: #e6f5ed;
       --error: #c0392b;
       --error-bg: #fdecea;
+      --warn: #7a5a1a;
+      --warn-bg: #fdf6e6;
       --input-bg: #f7f9fc;
-      --input-focus: #2e7dcd;
       --radius: 12px;
       --shadow: 0 8px 40px rgba(30,60,100,0.13);
     }
@@ -59,89 +59,46 @@
       background: var(--card-bg);
       border-radius: 20px;
       box-shadow: var(--shadow);
-      padding: 44px 40px 36px;
+      padding: 40px 40px 32px;
       width: 100%;
-      max-width: 420px;
+      max-width: 430px;
       position: relative;
       z-index: 1;
     }
 
-    .logo-area {
-      text-align: center;
-      margin-bottom: 32px;
-    }
+    .logo-area { text-align: center; margin-bottom: 28px; }
 
     .logo-circle {
-      width: 68px; height: 68px;
+      width: 64px; height: 64px;
       background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       box-shadow: 0 4px 18px rgba(46,125,205,0.25);
     }
 
-    .logo-circle svg {
-      width: 36px; height: 36px;
-      fill: none;
-      stroke: #fff;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
+    .logo-circle svg { width: 32px; height: 32px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    h1 {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 4px;
-    }
+    h1 { font-size: 21px; font-weight: 700; color: var(--primary); margin-bottom: 3px; }
+    .subtitle { font-size: 13px; color: var(--muted); }
 
-    .subtitle {
-      font-size: 13px;
-      color: var(--muted);
-    }
+    .form-group { margin-bottom: 16px; }
 
-    .form-group {
-      margin-bottom: 18px;
-    }
+    label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
 
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 7px;
-    }
-
-    .input-wrap {
-      position: relative;
-    }
+    .input-wrap { position: relative; }
 
     .input-icon {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-      pointer-events: none;
-      display: flex;
+      position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
+      color: var(--muted); pointer-events: none; display: flex;
     }
+    .input-icon svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    .input-icon svg {
-      width: 18px; height: 18px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    input[type="text"],
-    input[type="password"] {
+    input[type="text"], input[type="password"] {
       width: 100%;
-      padding: 11px 44px 11px 14px;
+      padding: 11px 42px 11px 40px;
       border: 1.5px solid var(--border);
       border-radius: var(--radius);
       background: var(--input-bg);
@@ -153,185 +110,130 @@
       direction: ltr;
       text-align: right;
     }
-
-    input:focus {
-      border-color: var(--input-focus);
-      box-shadow: 0 0 0 3px rgba(46,125,205,0.13);
-      background: #fff;
-    }
+    input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(46,125,205,0.13); background: #fff; }
 
     .toggle-pass {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--muted);
-      padding: 2px;
-      display: flex;
-      transition: color 0.2s;
+      position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; color: var(--muted);
+      padding: 2px; display: flex; transition: color 0.2s;
     }
-
     .toggle-pass:hover { color: var(--accent); }
-    .toggle-pass svg {
-      width: 18px; height: 18px;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
+    .toggle-pass svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .strength-bar { display: flex; gap: 4px; margin-top: 8px; }
+    .strength-bar span { flex: 1; height: 4px; border-radius: 2px; background: var(--border); transition: background 0.3s; }
+    .strength-label { font-size: 11px; color: var(--muted); margin-top: 4px; text-align: left; }
 
     .btn {
-      width: 100%;
-      padding: 13px;
+      width: 100%; padding: 12px;
       background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius);
-      font-family: 'Cairo', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s;
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      letter-spacing: 0.3px;
+      color: #fff; border: none; border-radius: var(--radius);
+      font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: opacity 0.2s, transform 0.15s; margin-top: 6px;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-
-    .btn:hover { opacity: 0.92; }
+    .btn:hover { opacity: 0.91; }
     .btn:active { transform: scale(0.98); }
     .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn svg { width: 17px; height: 17px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    .btn svg {
-      width: 18px; height: 18px;
-      stroke: #fff;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .btn-outline {
+      width: 100%; padding: 11px; background: none; border: 1.5px solid var(--border);
+      border-radius: var(--radius); font-family: 'Cairo', sans-serif; font-size: 14px;
+      font-weight: 600; cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
+    .btn-outline svg { width: 16px; height: 16px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .btn-outline.cp { color: var(--accent); }
+    .btn-outline.cp:hover { border-color: var(--accent); background: var(--input-bg); }
+    .btn-outline.cp svg { stroke: var(--accent); }
+
+    .btn-outline.lo { color: var(--muted); }
+    .btn-outline.lo:hover { border-color: #aaa; color: var(--text); }
+    .btn-outline.lo svg { stroke: currentColor; }
 
     .spinner {
-      width: 18px; height: 18px;
+      width: 17px; height: 17px;
       border: 2.5px solid rgba(255,255,255,0.4);
-      border-top-color: #fff;
-      border-radius: 50%;
-      animation: spin 0.75s linear infinite;
-      display: none;
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin 0.75s linear infinite; display: none;
     }
-
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .alert {
-      border-radius: var(--radius);
-      padding: 12px 16px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-top: 16px;
-      display: none;
-      align-items: center;
-      gap: 10px;
+      border-radius: var(--radius); padding: 11px 14px; font-size: 13px;
+      font-weight: 600; margin-top: 14px; display: none; align-items: center; gap: 9px;
     }
+    .alert svg { width: 17px; height: 17px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .alert.error   { background: var(--error-bg);   color: var(--error);   border: 1px solid #f5c6c1; }
+    .alert.success { background: var(--success-bg); color: var(--success); border: 1px solid #b2dfcd; }
+    .alert.warn    { background: var(--warn-bg);    color: var(--warn);    border: 1px solid #f0d890; }
 
-    .alert svg {
-      width: 18px; height: 18px;
-      flex-shrink: 0;
-      stroke: currentColor;
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .alert.error {
-      background: var(--error-bg);
-      color: var(--error);
-      border: 1px solid #f5c6c1;
-    }
-
-    .alert.success {
-      background: var(--success-bg);
-      color: var(--success);
-      border: 1px solid #b2dfcd;
-    }
-
-    .welcome-screen {
-      display: none;
-      text-align: center;
-      padding: 16px 0 8px;
-    }
-
+    .welcome-screen { display: none; padding: 10px 0 6px; }
+    .welcome-top { text-align: center; margin-bottom: 24px; }
     .welcome-icon {
-      width: 72px; height: 72px;
-      background: var(--success-bg);
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 18px;
+      width: 68px; height: 68px; background: var(--success-bg); border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px;
     }
+    .welcome-icon svg { width: 34px; height: 34px; stroke: var(--success); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .welcome-name { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+    .welcome-msg { font-size: 13px; color: var(--muted); }
+    .action-btns { display: flex; flex-direction: column; gap: 10px; }
 
-    .welcome-icon svg {
-      width: 36px; height: 36px;
-      stroke: var(--success);
-      fill: none;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
+    .change-pass-view { display: none; }
+
+    .view-header { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+    .back-icon-btn {
+      background: none; border: 1.5px solid var(--border); border-radius: 9px;
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--muted); transition: border-color 0.2s, color 0.2s; flex-shrink: 0;
     }
+    .back-icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .back-icon-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .view-header-text h2 { font-size: 17px; font-weight: 700; color: var(--primary); }
+    .view-header-text p { font-size: 12px; color: var(--muted); margin-top: 1px; }
 
-    .welcome-name {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 8px;
+    .notice-box {
+      background: #eef6ff; border: 1px solid #b8d9f7; border-radius: var(--radius);
+      padding: 12px 14px; font-size: 12px; color: #1a4a7a; line-height: 1.8; margin-bottom: 16px;
     }
+    .notice-box strong { font-weight: 700; display: block; margin-bottom: 4px; }
+    .notice-box code { background: rgba(46,125,205,0.12); padding: 1px 5px; border-radius: 4px; font-family: monospace; font-size: 11px; word-break: break-all; }
+    .notice-box a { color: var(--accent); }
 
-    .welcome-msg {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.7;
+    .script-row { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 16px; }
+    .script-row .form-group { flex: 1; margin-bottom: 0; }
+    .save-btn {
+      padding: 11px 14px; background: var(--primary); color: #fff; border: none;
+      border-radius: var(--radius); font-family: 'Cairo', sans-serif; font-size: 13px;
+      font-weight: 600; cursor: pointer; white-space: nowrap; transition: opacity 0.2s; flex-shrink: 0;
     }
+    .save-btn:hover { opacity: 0.88; }
 
-    .back-btn {
-      background: none;
-      border: 1.5px solid var(--border);
-      color: var(--muted);
-      border-radius: var(--radius);
-      font-family: 'Cairo', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 9px 20px;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: border-color 0.2s, color 0.2s;
+    hr.div { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+    .footer { text-align: center; margin-top: 18px; font-size: 11px; color: var(--muted); }
+
+    /* Apps Script code block */
+    .code-block {
+      background: #1a2535; color: #a8d8a8; border-radius: var(--radius);
+      padding: 12px 14px; font-family: monospace; font-size: 11px; line-height: 1.8;
+      margin-top: 10px; overflow-x: auto; direction: ltr; text-align: left;
     }
-
-    .back-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-    .footer {
-      text-align: center;
-      margin-top: 22px;
-      font-size: 12px;
-      color: var(--muted);
-    }
+    .code-block .kw { color: #79b8ff; }
+    .code-block .str { color: #f0a98a; }
+    .code-block .cm { color: #6a8a6a; }
 
     @media (max-width: 480px) {
-      .card { padding: 32px 22px 28px; margin: 16px; }
+      .card { padding: 28px 18px 24px; margin: 12px; }
     }
   </style>
 </head>
 <body>
-
 <div class="card">
 
-  <!-- Login Form -->
+  <!-- LOGIN VIEW -->
   <div id="loginView">
     <div class="logo-area">
       <div class="logo-circle">
@@ -344,9 +246,7 @@
     <div class="form-group">
       <label for="username">اسم المستخدم</label>
       <div class="input-wrap">
-        <span class="input-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </span>
+        <span class="input-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
         <input type="text" id="username" placeholder="اسم المستخدم" autocomplete="username"/>
       </div>
     </div>
@@ -354,171 +254,316 @@
     <div class="form-group">
       <label for="password">كلمة المرور</label>
       <div class="input-wrap">
-        <span class="input-icon">
-          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </span>
+        <span class="input-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
         <input type="password" id="password" placeholder="كلمة المرور" autocomplete="current-password"/>
-        <button class="toggle-pass" type="button" id="togglePass" aria-label="إظهار/إخفاء كلمة المرور">
-          <svg id="eyeIcon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <button class="toggle-pass" type="button" id="tp1" aria-label="إظهار/إخفاء">
+          <svg id="e1" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
         </button>
       </div>
     </div>
 
-    <button class="btn" id="loginBtn" type="button">
-      <span id="btnText">دخول</span>
-      <div class="spinner" id="spinner"></div>
-      <svg id="btnIcon" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+    <button class="btn" id="loginBtn">
+      <span id="lbt">دخول</span>
+      <div class="spinner" id="lsp"></div>
+      <svg id="lbi" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
     </button>
 
-    <div class="alert error" id="errorMsg">
+    <div class="alert error" id="loginErr">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <span id="errorText">اسم المستخدم أو كلمة المرور غير صحيحة.</span>
+      <span id="loginErrTx"></span>
     </div>
+    <div class="footer">البيانات محمية — جميع الحقوق محفوظة</div>
+  </div>
 
-    <div class="footer">
-      البيانات محمية ومشفرة — جميع الحقوق محفوظة
+  <!-- WELCOME VIEW -->
+  <div class="welcome-screen" id="welcomeView">
+    <div class="welcome-top">
+      <div class="welcome-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <p class="welcome-name" id="welcomeName">مرحباً!</p>
+      <p class="welcome-msg">تم تسجيل دخولك بنجاح.</p>
+    </div>
+    <div class="action-btns">
+      <button class="btn-outline cp" id="goCP">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><line x1="12" y1="15" x2="12" y2="17"/></svg>
+        تغيير كلمة المرور
+      </button>
+      <button class="btn-outline lo" id="logoutBtn">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        تسجيل الخروج
+      </button>
     </div>
   </div>
 
-  <!-- Welcome Screen -->
-  <div class="welcome-screen" id="welcomeView">
-    <div class="welcome-icon">
-      <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+  <!-- CHANGE PASSWORD VIEW -->
+  <div class="change-pass-view" id="cpView">
+    <div class="view-header">
+      <button class="back-icon-btn" id="backBtn">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="view-header-text">
+        <h2>تغيير كلمة المرور</h2>
+        <p>التحديث المباشر في Google Sheets</p>
+      </div>
     </div>
-    <p class="welcome-name" id="welcomeName">مرحباً!</p>
-    <p class="welcome-msg">تم تسجيل دخولك بنجاح. يسعدنا وجودك معنا.</p>
-    <br/>
-    <button class="back-btn" id="logoutBtn">← تسجيل الخروج</button>
+
+    <div class="notice-box" id="scriptNotice">
+      <strong>⚙️ إعداد مطلوب — Google Apps Script</strong>
+      أنشئ Script جديد في <a href="https://script.google.com/home" target="_blank">script.google.com</a> وانسخ الكود التالي فيه، ثم انشره كـ Web App وأدخل الرابط أدناه:
+      <div class="code-block"><span class="kw">function</span> doGet(e) {
+  <span class="kw">var</span> p = e.parameter;
+  <span class="kw">var</span> ss = SpreadsheetApp.openById(p.sheetId);
+  <span class="kw">var</span> sh = ss.getSheets()[0];
+  <span class="kw">var</span> data = sh.getDataRange().getValues();
+  <span class="kw">var</span> headers = data[0].map(<span class="kw">function</span>(h){ <span class="kw">return</span> h.toString().toLowerCase(); });
+  <span class="kw">var</span> uCol = headers.indexOf(p.usernameKey);
+  <span class="kw">var</span> pCol = headers.indexOf(p.passwordKey);
+  <span class="kw">for</span> (<span class="kw">var</span> i=1; i&lt;data.length; i++) {
+    <span class="kw">if</span> (data[i][uCol].toString().toLowerCase() === p.username.toLowerCase()) {
+      sh.getRange(i+1, pCol+1).setValue(p.newPassword);
+      <span class="kw">return</span> ContentService.createTextOutput(<span class="str">"success"</span>);
+    }
+  }
+  <span class="kw">return</span> ContentService.createTextOutput(<span class="str">"not_found"</span>);
+}</div>
+    </div>
+
+    <div class="script-row">
+      <div class="form-group">
+        <label for="scriptUrl">رابط Web App</label>
+        <div class="input-wrap">
+          <span class="input-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+          <input type="text" id="scriptUrl" placeholder="https://script.google.com/macros/s/..." style="padding-left:14px;text-align:left;direction:ltr;font-size:12px;"/>
+        </div>
+      </div>
+      <button class="save-btn" id="saveScript">حفظ</button>
+    </div>
+
+    <hr class="div"/>
+
+    <div class="form-group">
+      <label for="oldPass">كلمة المرور الحالية</label>
+      <div class="input-wrap">
+        <span class="input-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <input type="password" id="oldPass" placeholder="كلمة المرور الحالية"/>
+        <button class="toggle-pass" type="button" id="tp2" aria-label="إظهار/إخفاء"><svg id="e2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="newPass">كلمة المرور الجديدة</label>
+      <div class="input-wrap">
+        <span class="input-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <input type="password" id="newPass" placeholder="كلمة مرور قوية جديدة"/>
+        <button class="toggle-pass" type="button" id="tp3" aria-label="إظهار/إخفاء"><svg id="e3" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+      </div>
+      <div class="strength-bar"><span id="s1"></span><span id="s2"></span><span id="s3"></span><span id="s4"></span></div>
+      <div class="strength-label" id="sLabel"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="confPass">تأكيد كلمة المرور الجديدة</label>
+      <div class="input-wrap">
+        <span class="input-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <input type="password" id="confPass" placeholder="أعد إدخال كلمة المرور الجديدة"/>
+        <button class="toggle-pass" type="button" id="tp4" aria-label="إظهار/إخفاء"><svg id="e4" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+      </div>
+    </div>
+
+    <button class="btn" id="cpBtn">
+      <span id="cpbt">تحديث كلمة المرور</span>
+      <div class="spinner" id="cpsp"></div>
+      <svg id="cpbi" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+    </button>
+
+    <div class="alert" id="cpAlert">
+      <svg viewBox="0 0 24 24" id="cpAlertIco"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="cpAlertTx"></span>
+    </div>
   </div>
 
 </div>
-
 <script>
-  const SHEET_ID = '1mqWU5jNw8PZhJP-j3QLdDBjO8OxyT9xjiU5dIJ0BHgA';
-  const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+  const SHEET_ID  = '1mqWU5jNw8PZhJP-j3QLdDBjO8OxyT9xjiU5dIJ0BHgA';
+  const CSV_URL   = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+  const SK        = 'apps_script_url';
 
-  const loginBtn = document.getElementById('loginBtn');
-  const btnText = document.getElementById('btnText');
-  const btnIcon = document.getElementById('btnIcon');
-  const spinner = document.getElementById('spinner');
-  const errorMsg = document.getElementById('errorMsg');
-  const errorText = document.getElementById('errorText');
-  const loginView = document.getElementById('loginView');
-  const welcomeView = document.getElementById('welcomeView');
-  const welcomeName = document.getElementById('welcomeName');
-  const togglePass = document.getElementById('togglePass');
-  const passwordInput = document.getElementById('password');
-  const eyeIcon = document.getElementById('eyeIcon');
+  const EO = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+  const EC = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>`;
 
-  const eyeOpen = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
-  const eyeClosed = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>`;
+  let CU = null, UK = null, PK = null, NK = null;
 
-  togglePass.addEventListener('click', () => {
-    const isPass = passwordInput.type === 'password';
-    passwordInput.type = isPass ? 'text' : 'password';
-    eyeIcon.innerHTML = isPass ? eyeClosed : eyeOpen;
-  });
+  const V = {
+    login:   document.getElementById('loginView'),
+    welcome: document.getElementById('welcomeView'),
+    cp:      document.getElementById('cpView')
+  };
 
-  function parseCSV(text) {
-    const lines = text.trim().split('\n');
-    const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
-    return lines.slice(1).map(line => {
-      const vals = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-      const obj = {};
-      headers.forEach((h, i) => { obj[h] = vals[i] || ''; });
-      return obj;
+  function show(v) { Object.values(V).forEach(x => x.style.display='none'); v.style.display='block'; }
+
+  function eye(bid, iid, eid) {
+    document.getElementById(bid).addEventListener('click', () => {
+      const inp = document.getElementById(iid), ico = document.getElementById(eid);
+      inp.type = inp.type==='password' ? 'text' : 'password';
+      ico.innerHTML = inp.type==='password' ? EO : EC;
+    });
+  }
+  eye('tp1','password','e1'); eye('tp2','oldPass','e2'); eye('tp3','newPass','e3'); eye('tp4','confPass','e4');
+
+  function parseCSV(t) {
+    const lines = t.trim().split('\n');
+    const heads = lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,'').toLowerCase());
+    return lines.slice(1).map(l => {
+      const vs = l.split(',').map(v=>v.trim().replace(/^"|"$/g,''));
+      const o = {}; heads.forEach((h,i)=>{ o[h]=vs[i]||''; }); return o;
     });
   }
 
-  function setLoading(state) {
-    loginBtn.disabled = state;
-    spinner.style.display = state ? 'block' : 'none';
-    btnText.textContent = state ? 'جارٍ التحقق...' : 'دخول';
-    btnIcon.style.display = state ? 'none' : 'block';
+  function fk(obj, terms) { return Object.keys(obj).find(k=>terms.some(t=>k.includes(t))); }
+
+  function alert2(elId, icoId, txId, type, msg) {
+    const el = document.getElementById(elId), ico = document.getElementById(icoId);
+    el.className = `alert ${type}`;
+    document.getElementById(txId).textContent = msg;
+    ico.innerHTML = type==='success'
+      ? `<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>`
+      : `<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>`;
+    el.style.display = 'flex';
   }
 
-  function showError(msg) {
-    errorText.textContent = msg;
-    errorMsg.style.display = 'flex';
-    errorMsg.className = 'alert error';
-  }
+  // LOGIN
+  async function doLogin() {
+    const u = document.getElementById('username').value.trim();
+    const p = document.getElementById('password').value.trim();
+    document.getElementById('loginErr').style.display='none';
+    if (!u||!p) { alert2('loginErr','','loginErrTx','error','الرجاء إدخال اسم المستخدم وكلمة المرور.'); return; }
 
-  function hideError() {
-    errorMsg.style.display = 'none';
-  }
-
-  loginBtn.addEventListener('click', async () => {
-    const username = document.getElementById('username').value.trim();
-    const password = passwordInput.value.trim();
-
-    hideError();
-
-    if (!username || !password) {
-      showError('الرجاء إدخال اسم المستخدم وكلمة المرور.');
-      return;
-    }
-
-    setLoading(true);
+    document.getElementById('loginBtn').disabled=true;
+    document.getElementById('lsp').style.display='block';
+    document.getElementById('lbt').textContent='جارٍ التحقق...';
+    document.getElementById('lbi').style.display='none';
 
     try {
-      const res = await fetch(CSV_URL);
-      if (!res.ok) throw new Error('فشل تحميل البيانات');
-      const csv = await res.text();
-      const users = parseCSV(csv);
-
-      const usernameKey = Object.keys(users[0] || {}).find(k =>
-        k.includes('user') || k.includes('اسم') || k.includes('username') || k === 'user'
-      );
-      const passwordKey = Object.keys(users[0] || {}).find(k =>
-        k.includes('pass') || k.includes('كلمة') || k.includes('password') || k === 'pass'
-      );
-      const nameKey = Object.keys(users[0] || {}).find(k =>
-        k.includes('name') || k.includes('الاسم') || k.includes('full') || k === 'name'
-      );
-
-      if (!usernameKey || !passwordKey) {
-        showError('تعذّر العثور على أعمدة المستخدم أو كلمة المرور في البيانات.');
-        setLoading(false);
-        return;
-      }
-
-      const match = users.find(u =>
-        (u[usernameKey] || '').toLowerCase() === username.toLowerCase() &&
-        (u[passwordKey] || '') === password
-      );
-
-      if (match) {
-        const displayName = nameKey ? (match[nameKey] || username) : username;
-        welcomeName.textContent = `مرحباً، ${displayName}!`;
-        loginView.style.display = 'none';
-        welcomeView.style.display = 'block';
+      const r = await fetch(CSV_URL);
+      if (!r.ok) throw new Error();
+      const users = parseCSV(await r.text());
+      UK = fk(users[0]||{}, ['user','اسم','username']);
+      PK = fk(users[0]||{}, ['pass','كلمة','password']);
+      NK = fk(users[0]||{}, ['name','الاسم','full']);
+      if (!UK||!PK) { alert2('loginErr','','loginErrTx','error','تعذّر العثور على أعمدة البيانات.'); return; }
+      const m = users.find(u2=>(u2[UK]||'').toLowerCase()===u.toLowerCase()&&(u2[PK]||'')===p);
+      if (m) {
+        CU = {...m, _u: u};
+        document.getElementById('welcomeName').textContent = `مرحباً، ${NK?(m[NK]||u):u}!`;
+        show(V.welcome);
       } else {
-        showError('اسم المستخدم أو كلمة المرور غير صحيحة. حاول مجدداً.');
+        alert2('loginErr','','loginErrTx','error','اسم المستخدم أو كلمة المرور غير صحيحة.');
       }
+    } catch {
+      alert2('loginErr','','loginErrTx','error','خطأ في الاتصال. تأكد من مشاركة الجدول بشكل عام.');
+    }
+    document.getElementById('loginBtn').disabled=false;
+    document.getElementById('lsp').style.display='none';
+    document.getElementById('lbt').textContent='دخول';
+    document.getElementById('lbi').style.display='block';
+  }
 
-    } catch (err) {
-      showError('حدث خطأ أثناء الاتصال. تأكد من مشاركة الجدول بشكل عام، أو حاول مرة أخرى.');
-      console.error(err);
+  document.getElementById('loginBtn').addEventListener('click', doLogin);
+  document.getElementById('username').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('password').focus(); });
+  document.getElementById('password').addEventListener('keydown', e=>{ if(e.key==='Enter') doLogin(); });
+
+  document.getElementById('logoutBtn').addEventListener('click', ()=>{
+    CU=null;
+    document.getElementById('username').value='';
+    document.getElementById('password').value='';
+    document.getElementById('loginErr').style.display='none';
+    show(V.login);
+  });
+
+  document.getElementById('goCP').addEventListener('click', ()=>{
+    ['oldPass','newPass','confPass'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('cpAlert').style.display='none';
+    updateStrength('');
+    const saved = localStorage.getItem(SK);
+    if (saved) { document.getElementById('scriptUrl').value=saved; document.getElementById('scriptNotice').style.display='none'; }
+    else { document.getElementById('scriptNotice').style.display='block'; }
+    show(V.cp);
+  });
+
+  document.getElementById('backBtn').addEventListener('click', ()=>show(V.welcome));
+
+  document.getElementById('saveScript').addEventListener('click', ()=>{
+    const url = document.getElementById('scriptUrl').value.trim();
+    if (!url.startsWith('https://script.google.com')) {
+      alert2('cpAlert','cpAlertIco','cpAlertTx','warn','أدخل رابط Apps Script صحيحاً.'); return;
+    }
+    localStorage.setItem(SK, url);
+    document.getElementById('scriptNotice').style.display='none';
+    alert2('cpAlert','cpAlertIco','cpAlertTx','success','✓ تم حفظ رابط Apps Script.');
+  });
+
+  // Strength meter
+  document.getElementById('newPass').addEventListener('input', e=>updateStrength(e.target.value));
+  function updateStrength(p) {
+    const bars=[document.getElementById('s1'),document.getElementById('s2'),document.getElementById('s3'),document.getElementById('s4')];
+    const lbl=document.getElementById('sLabel');
+    const cl=['#e24b4a','#ef9f27','#2e7dcd','#1a7a4a'];
+    const lb=['ضعيفة جداً','مقبولة','جيدة','قوية جداً'];
+    bars.forEach(b=>b.style.background='var(--border)');
+    if(!p){lbl.textContent='';return;}
+    let s=0;
+    if(p.length>=6)s++;
+    if(p.length>=10)s++;
+    if(/[A-Z]/.test(p)&&/[a-z]/.test(p))s++;
+    if(/[0-9]/.test(p)&&/[^a-zA-Z0-9]/.test(p))s++;
+    for(let i=0;i<=s;i++)bars[i].style.background=cl[s];
+    lbl.textContent=lb[s]; lbl.style.color=cl[s];
+  }
+
+  // Change password
+  document.getElementById('cpBtn').addEventListener('click', async ()=>{
+    const oldP = document.getElementById('oldPass').value.trim();
+    const newP = document.getElementById('newPass').value.trim();
+    const conf = document.getElementById('confPass').value.trim();
+    const surl = localStorage.getItem(SK)||document.getElementById('scriptUrl').value.trim();
+
+    document.getElementById('cpAlert').style.display='none';
+
+    if(!oldP||!newP||!conf){ alert2('cpAlert','cpAlertIco','cpAlertTx','error','يرجاء ملء جميع الحقول.'); return; }
+    if(oldP!==CU[PK])       { alert2('cpAlert','cpAlertIco','cpAlertTx','error','كلمة المرور الحالية غير صحيحة.'); return; }
+    if(newP.length<6)        { alert2('cpAlert','cpAlertIco','cpAlertTx','error','كلمة المرور الجديدة يجب أن تكون 6 أحرف على الأقل.'); return; }
+    if(newP!==conf)          { alert2('cpAlert','cpAlertIco','cpAlertTx','error','كلمة المرور وتأكيدها غير متطابقتين.'); return; }
+    if(newP===oldP)          { alert2('cpAlert','cpAlertIco','cpAlertTx','warn','كلمة المرور الجديدة مطابقة للحالية.'); return; }
+    if(!surl||!surl.startsWith('https://script.google.com')){ alert2('cpAlert','cpAlertIco','cpAlertTx','warn','يرجاء إدخال رابط Google Apps Script وحفظه أولاً.'); return; }
+
+    document.getElementById('cpBtn').disabled=true;
+    document.getElementById('cpsp').style.display='block';
+    document.getElementById('cpbt').textContent='جارٍ التحديث...';
+    document.getElementById('cpbi').style.display='none';
+
+    try {
+      const params = new URLSearchParams({ sheetId:SHEET_ID, usernameKey:UK, passwordKey:PK, username:CU._u, newPassword:newP });
+      const res = await fetch(`${surl}?${params}`);
+      const txt = await res.text();
+      if(txt.includes('success')||res.ok){
+        CU[PK]=newP;
+        alert2('cpAlert','cpAlertIco','cpAlertTx','success','✓ تم تحديث كلمة المرور بنجاح في Google Sheets!');
+        ['oldPass','newPass','confPass'].forEach(id=>document.getElementById(id).value='');
+        updateStrength('');
+      } else {
+        alert2('cpAlert','cpAlertIco','cpAlertTx','error','فشل التحديث. تأكد من إعدادات Apps Script وصلاحيات النشر.');
+      }
+    } catch {
+      alert2('cpAlert','cpAlertIco','cpAlertTx','error','خطأ في الاتصال بـ Apps Script.');
     }
 
-    setLoading(false);
+    document.getElementById('cpBtn').disabled=false;
+    document.getElementById('cpsp').style.display='none';
+    document.getElementById('cpbt').textContent='تحديث كلمة المرور';
+    document.getElementById('cpbi').style.display='block';
   });
 
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-    welcomeView.style.display = 'none';
-    loginView.style.display = 'block';
-    document.getElementById('username').value = '';
-    passwordInput.value = '';
-    hideError();
-  });
-
-  document.getElementById('username').addEventListener('keydown', e => {
-    if (e.key === 'Enter') passwordInput.focus();
-  });
-
-  passwordInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') loginBtn.click();
-  });
+  show(V.login);
 </script>
 </body>
 </html>
+
