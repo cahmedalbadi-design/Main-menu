@@ -229,6 +229,7 @@
       .card { padding: 28px 18px 24px; margin: 12px; }
     }
   </style>
+<base target="_blank">
 </head>
 <body>
 <div class="card">
@@ -423,22 +424,25 @@
       UK = fk(users[0]||{}, ['user','اسم','username']);
       PK = fk(users[0]||{}, ['pass','كلمة','password']);
       NK = fk(users[0]||{}, ['name','الاسم','full']);
-      if (!UK||!PK) { alert2('loginErr','','loginErrTx','error','تعذّر العثور على أعمدة البيانات.'); return; }
-      const m = users.find(u2=>(u2[UK]||'').toLowerCase()===u.toLowerCase()&&(u2[PK]||'')===p);
-      if (m) {
-        CU = {...m, _u: u};
-        document.getElementById('welcomeName').textContent = `مرحباً، ${NK?(m[NK]||u):u}!`;
-        show(V.welcome);
-      } else {
-        alert2('loginErr','','loginErrTx','error','اسم المستخدم أو كلمة المرور غير صحيحة.');
+      if (!UK||!PK) { alert2('loginErr','','loginErrTx','error','تعذّر العثور على أعمدة البيانات.'); }
+      else {
+        const m = users.find(u2=>(u2[UK]||'').toLowerCase()===u.toLowerCase()&&(u2[PK]||'')===p);
+        if (m) {
+          CU = {...m, _u: u};
+          document.getElementById('welcomeName').textContent = `مرحباً، ${NK?(m[NK]||u):u}!`;
+          show(V.welcome);
+        } else {
+          alert2('loginErr','','loginErrTx','error','اسم المستخدم أو كلمة المرور غير صحيحة.');
+        }
       }
     } catch {
       alert2('loginErr','','loginErrTx','error','خطأ في الاتصال. تأكد من مشاركة الجدول بشكل عام.');
+    } finally {
+      document.getElementById('loginBtn').disabled=false;
+      document.getElementById('lsp').style.display='none';
+      document.getElementById('lbt').textContent='دخول';
+      document.getElementById('lbi').style.display='block';
     }
-    document.getElementById('loginBtn').disabled=false;
-    document.getElementById('lsp').style.display='none';
-    document.getElementById('lbt').textContent='دخول';
-    document.getElementById('lbi').style.display='block';
   }
 
   document.getElementById('loginBtn').addEventListener('click', doLogin);
@@ -495,7 +499,6 @@
     if(newP!==conf)          { alert2('cpAlert','cpAlertIco','cpAlertTx','error','كلمة المرور وتأكيدها غير متطابقتين.'); return; }
     if(newP===oldP)          { alert2('cpAlert','cpAlertIco','cpAlertTx','warn','كلمة المرور الجديدة مطابقة للحالية.'); return; }
 
-
     document.getElementById('cpBtn').disabled=true;
     document.getElementById('cpsp').style.display='block';
     document.getElementById('cpbt').textContent='جارٍ التحديث...';
@@ -515,12 +518,12 @@
       }
     } catch {
       alert2('cpAlert','cpAlertIco','cpAlertTx','error','خطأ في الاتصال بـ Apps Script.');
+    } finally {
+      document.getElementById('cpBtn').disabled=false;
+      document.getElementById('cpsp').style.display='none';
+      document.getElementById('cpbt').textContent='تحديث كلمة المرور';
+      document.getElementById('cpbi').style.display='block';
     }
-
-    document.getElementById('cpBtn').disabled=false;
-    document.getElementById('cpsp').style.display='none';
-    document.getElementById('cpbt').textContent='تحديث كلمة المرور';
-    document.getElementById('cpbi').style.display='block';
   });
 
   show(V.login);
